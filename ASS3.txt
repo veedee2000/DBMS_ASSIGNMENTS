@@ -1,0 +1,48 @@
+
+
+
+Q.2 > At the time of creation if we forget to create a field enrollment date (ENROLL_DATE) in ENROLL table so add the field.
+
+
+Ans - >   ALTER TABLE ENROLL ADD ENROLL_DATE VARCHAR(20);
+
+
+Q.3 > Course name cannot be blank, therefore add the criteria in the specific table.
+
+
+
+Ans - >   ALTER TABLE COURSE ADD PRIMARY KEY  (COURSE_NAME);
+
+
+Q.4 > Find the course with more than 3 students.
+
+
+Ans - >   SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) > 3;
+
+
+Q.6 > Display the COURSE with maximum number of STUDENTS Enrolled.
+
+
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID WHERE COUNT(*)  = (SELECT ))
+
+
+Q.7 > Find out the course in which no student enrolled.
+
+
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID WHERE COUNT(*) = 0);
+
+
+Q.8 > Delete course no 30 from table course.
+
+
+Ans - >   DELETE FROM COURSE WHERE COURSE_ID = 30;
+
+
+Q.9 > Rename course table as department.
+
+
+Ans - >   ALTER TABLE COURSE RENAME TO DEPARTMENT;
+
+
+Q.10 > 
+
