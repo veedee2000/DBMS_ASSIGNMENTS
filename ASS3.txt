@@ -17,19 +17,26 @@ Ans - >   ALTER TABLE COURSE ADD PRIMARY KEY  (COURSE_NAME);
 Q.4 > Find the course with more than 3 students.
 
 
-Ans - >   SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) > 3;
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
+          SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) > 3
+          );
 
 
 Q.6 > Display the COURSE with maximum number of STUDENTS Enrolled.
 
 
-Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID WHERE COUNT(*)  = (SELECT ))
-
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
+          SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) = (
+          SELECT COUNT(*) FROM STUDENT_COURSE GROUP BY COURSE_ID ORDER BY COUNT(COURSE_ID) DESC LIMIT 1
+          )
+          );
 
 Q.7 > Find out the course in which no student enrolled.
 
 
-Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID WHERE COUNT(*) = 0);
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID NOT IN (
+          SELECT COURSE_ID FROM GRADE GROUP BY COURSE_ID HAVING COUNT(*) > 0
+          );
 
 
 Q.8 > Delete course no 30 from table course.
@@ -44,5 +51,24 @@ Q.9 > Rename course table as department.
 Ans - >   ALTER TABLE COURSE RENAME TO DEPARTMENT;
 
 
-Q.10 > 
+Q.10 > Change the Marks Grade of Student “A” to “B” who is Enroll in the subject DBMS.
 
+
+Ans - >   UPDATE GRADE SET GRADE_RECIEVED = 'B' WHERE GRADE_RECIEVED = 'B' AND SUBJECT_ID = (
+          SELECT SUBJECT_ID FROM SUBJECT WHERE SUBJECT_NAME = 'DBMS'
+          );
+
+
+Q.11 > Delete the record of the student who is enrolled in the course ‘IT’.
+
+
+Ans - >   DELETE FROM STUDENT WHERE STUDENT_ID = (
+          SELECT STUDENT_ID FROM STUDENT_COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM COURSE WHERE COURSE = 'IT'
+          )
+          );
+
+
+Q.12 > Change the enroll date to ‘16-08-2018’ whose student id is 18069 (first convert the date into the default format).
+
+
+Ans - >   UPDATE ENROLL SET ENROLL_DATE = '16-08-2018' WHERE ENROLL_ID = 18069;
