@@ -11,7 +11,7 @@ Q.3 > Course name cannot be blank, therefore add the criteria in the specific ta
 
 
 
-Ans - >   ALTER TABLE COURSE ADD PRIMARY KEY  (COURSE_NAME);
+Ans - >   ALTER TABLE COURSE MODIFY COURSE_NAME NOT NULL;
 
 
 Q.4 > Find the course with more than 3 students.
@@ -64,7 +64,7 @@ Q.11 > Delete the record of the student who is enrolled in the course ‘IT’.
 
 Ans - >   DELETE FROM STUDENT WHERE STUDENT_ID = (
           SELECT STUDENT_ID FROM STUDENT_COURSE WHERE COURSE_ID = (
-          SELECT COURSE_ID FROM COURSE WHERE COURSE = 'IT'
+          SELECT COURSE_ID FROM COURSE WHERE COURSE_NAME = 'IT'
           )
           );
 
