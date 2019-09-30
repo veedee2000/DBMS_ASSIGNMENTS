@@ -24,7 +24,8 @@ Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
 
 Q.5 > Give the details of a student with all subjects and grade where he/she enroll(enter the sid value as input)
 
-Ans - > 
+Ans - > SELECT STUDENT.STUDENT_NAME, STUDENT.DOB, STUDENT.EMAIL, GRADE.GRADE_RECIEVED, SUBJECT.SUBJECT_NAME FROM STUDENT , GRADE ,               SUBJECT WHERE STUDENT.STUDENT_ID = &STUDENT_ID AND
+        STUDENT.STUDENT_ID = GRADE.STUDENT_ID AND GRADE.SUBJECT_ID = SUBJECT.SUBJECT_ID;
 
 
 Q.6 > Display the COURSE with maximum number of STUDENTS Enrolled.
