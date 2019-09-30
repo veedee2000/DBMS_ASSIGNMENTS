@@ -1,0 +1,214 @@
+NAME : VARUN DAS		                DBMS ASSIGNMENT - 3
+
+ROLL : 001811001071
+
+BATCH : IT, 2ND YEAR.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Q.1 > Insert atleast 5 tuples in each table.
+
+
+Ans - >   INSERT INTO STUDENT VALUES (18069, 'VARUN', '21-jun-2000', 'va@gmail.com');  
+	  INSERT INTO STUDENT VALUES (18070, 'SABUJ', '21-jul-2000', 'sa@gmail.com');  
+	  INSERT INTO STUDENT VALUES (18071, 'RUPAYAN', '21-aug-2000', 'ru@gmail.com');  
+	  INSERT INTO STUDENT VALUES (18072, 'ASHISH', '21-sep-2000', 'as@gmail.com');  
+	  INSERT INTO STUDENT VALUES (18073, 'GOOGLE', '21-oct-2000', 'go@gmail.com'); 
+
+
+	  INSERT INTO COURSE VALUES (10, 'IT');
+	  INSERT INTO COURSE VALUES (20, 'IEEE');
+          INSERT INTO COURSE VALUES (30, 'CSE');
+	  INSERT INTO COURSE VALUES (40, 'ECE');
+	  INSERT INTO COURSE VALUES (50, 'ETCE');
+
+
+	  INSERT INTO SUBJECT VALUES (1, 'MATHS');
+	  INSERT INTO SUBJECT VALUES (2, 'PHYSICS');
+	  INSERT INTO SUBJECT VALUES (3, 'CHEMISTRY');
+	  INSERT INTO SUBJECT VALUES (4, 'ELECTRTONICS');
+	  INSERT INTO SUBJECT VALUES (5, 'ELECTRICAL');
+	  INSERT INTO SUBJECT VALUES (6, 'WELDING');
+	  INSERT INTO SUBJECT VALUES (7, 'FITTING');
+	  INSERT INTO SUBJECT VALUES (8, 'OOP');
+	  INSERT INTO SUBJECT VALUES (9, 'DBMS');
+	  INSERT INTO SUBJECT VALUES (10, 'DSA');
+
+
+	  INSERT INTO GRADE VALUES (18069, 10, 1, 'A');
+	  INSERT INTO GRADE VALUES (18069, 10, 2, 'A');
+	  INSERT INTO GRADE VALUES (18069, 10, 3, 'A');
+	  INSERT INTO GRADE VALUES (18069, 10, 4, 'C');
+	  INSERT INTO GRADE VALUES (18069, 10, 5, 'B');
+
+	  INSERT INTO GRADE VALUES (18070, 10, 1, 'A');
+	  INSERT INTO GRADE VALUES (18070, 10, 3, 'A');
+	  INSERT INTO GRADE VALUES (18070, 10, 4, 'A');
+	  INSERT INTO GRADE VALUES (18070, 10, 5, 'C');
+	  INSERT INTO GRADE VALUES (18070, 10, 6, 'B');
+	  INSERT INTO GRADE VALUES (18070, 10, 7, 'E');
+
+
+	  INSERT INTO GRADE VALUES (18071, 20, 3, 'C');
+	  INSERT INTO GRADE VALUES (18071, 20, 4, 'D');
+  	  INSERT INTO GRADE VALUES (18071, 20, 5, 'A');
+	  INSERT INTO GRADE VALUES (18071, 20, 6, 'F');
+	  INSERT INTO GRADE VALUES (18071, 20, 7, 'F');
+	  INSERT INTO GRADE VALUES (18071, 20, 9, 'A');
+
+	  INSERT INTO GRADE VALUES (18072, 20, 3, 'A');
+	  INSERT INTO GRADE VALUES (18072, 20, 4, 'F');
+	  INSERT INTO GRADE VALUES (18072, 20, 5, 'A');
+	  INSERT INTO GRADE VALUES (18072, 20, 6, 'B');
+	  INSERT INTO GRADE VALUES (18072, 20, 7, 'B');
+	  INSERT INTO GRADE VALUES (18072, 20, 9, 'C');
+
+	  INSERT INTO GRADE VALUES (18073, 30, 1, 'F');
+	  INSERT INTO GRADE VALUES (18073, 30, 5, 'A');
+	  INSERT INTO GRADE VALUES (18073, 30, 6, 'B');
+	  INSERT INTO GRADE VALUES (18073, 30, 7, 'C');
+	  INSERT INTO GRADE VALUES (18073, 30, 8, 'C');
+	  INSERT INTO GRADE VALUES (18073, 30, 10, 'C');
+
+	  INSERT INTO ENROLL VALUES (18069, '16-aug-2018');
+	  INSERT INTO ENROLL VALUES (18070, '12-aug-2018');
+	  INSERT INTO ENROLL VALUES (18071, '11-aug-2018');
+   	  INSERT INTO ENROLL VALUES (18072, '16-aug-2018');
+	  INSERT INTO ENROLL VALUES (18073, '16-sep-2018');
+
+	  INSERT INTO COURSE_SUBJECT VALUES (10,1);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,2);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,3);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,4);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,5);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,6);
+	  INSERT INTO COURSE_SUBJECT VALUES (10,7);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,3);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,4);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,5);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,6);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,7);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,8);
+	  INSERT INTO COURSE_SUBJECT VALUES (20,9);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,1);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,5);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,6);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,7);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,8);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,9);
+	  INSERT INTO COURSE_SUBJECT VALUES (30,10);
+
+	  INSERT INTO STUDENT_COURSE VALUES (18069, 10);
+	  INSERT INTO STUDENT_COURSE VALUES (18070, 10);
+	  INSERT INTO STUDENT_COURSE VALUES (18071, 20);
+	  INSERT INTO STUDENT_COURSE VALUES (18072, 20);
+	  INSERT INTO STUDENT_COURSE VALUES (18073, 30);
+
+	  
+	  
+----------------------------------------------------------------------------------------------------------------------------------- 
+
+Q.2 > At the time of creation if we forget to create a field enrollment date (ENROLL_DATE) in ENROLL table so add the field.
+
+
+Ans - >   ALTER TABLE ENROLL ADD ENROLL_DATE DATE;
+
+
+Q.3 > Course name cannot be blank, therefore add the criteria in the specific table.
+
+
+Ans - >   ALTER TABLE COURSE MODIFY COURSE_NAME NOT NULL;
+
+
+Q.4 > Find the course with more than 3 students.
+
+
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
+          SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) > 3
+          );
+
+
+      no rows selected
+
+
+Q.5 > Give the details of a student with all subjects and grade where he/she enroll(enter the sid value as input)
+
+
+Ans - > SELECT STUDENT.STUDENT_NAME, STUDENT.DOB, STUDENT.EMAIL, GRADE.GRADE_RECIEVED, SUBJECT.SUBJECT_NAME FROM STUDENT , GRADE ,               SUBJECT WHERE STUDENT.STUDENT_ID = &STUDENT_ID AND
+        STUDENT.STUDENT_ID = GRADE.STUDENT_ID AND GRADE.SUBJECT_ID = SUBJECT.SUBJECT_ID;
+
+
+    	STUDENT_NAME         DOB       EMAIL                          G SUBJECT_NAME
+-------------------- --------- ------------------------------ - --------------------
+VARUN                21-JUN-00 va@gmail.com                   A MATHS
+VARUN                21-JUN-00 va@gmail.com                   A PHYSICS
+VARUN                21-JUN-00 va@gmail.com                   A CHEMISTRY
+VARUN                21-JUN-00 va@gmail.com                   C ELECTRTONICS
+VARUN                21-JUN-00 va@gmail.com                   B ELECTRICAL
+
+
+Q.6 > Display the COURSE with maximum number of STUDENTS Enrolled.
+
+
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
+          SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) = (
+	  SELECT MAX(C) FROM (
+	  SELECT COUNT(*) AS C FROM STUDENT_COURSE GROUP BY COURSE_ID order by count(COURSE_id)
+          )
+          )
+          );
+
+
+COURSE_NAME
+--------------------
+IT
+IEEE
+
+
+Q.7 > Find out the course in which no student enrolled.
+
+
+Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID NOT IN (
+          SELECT COURSE_ID FROM GRADE GROUP BY COURSE_ID HAVING COUNT(*) > 0
+          );
+
+
+COURSE_NAME
+--------------------
+ECE
+ETCE
+
+
+Q.8 > Delete course no 30 from table course.
+
+
+Ans - >   DELETE FROM COURSE WHERE COURSE_ID = 30;
+
+
+Q.9 > Rename course table as department.
+
+
+Ans - >   ALTER TABLE COURSE RENAME TO DEPARTMENT;
+
+
+Q.10 > Change the Marks Grade of Student “A” to “B” who is Enroll in the subject DBMS.
+
+
+Ans - >   UPDATE GRADE SET GRADE_RECIEVED = 'B' WHERE GRADE_RECIEVED = 'A' AND SUBJECT_ID = (
+          SELECT SUBJECT_ID FROM SUBJECT WHERE SUBJECT_NAME = 'DBMS'
+          );
+
+
+Q.11 > Delete the record of the student who is enrolled in the course ‘IT’.
+
+
+Ans - >   DELETE FROM STUDENT WHERE STUDENT_ID = (
+          SELECT STUDENT_ID FROM STUDENT_COURSE WHERE COURSE_ID = (
+          SELECT COURSE_ID FROM COURSE WHERE COURSE_NAME = 'IT'
+          )
+          );
+
+
+Q.12 > Change the enroll date to ‘16-08-2018’ whose student id is 18069 (first convert the date into the default format).
+
+
+Ans - >   UPDATE ENROLL SET ENROLL_DATE = TO_DATE('16-08-2018', 'dd-mm-yyyy') WHERE ENROLL_ID = 18069;
