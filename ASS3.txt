@@ -63,7 +63,8 @@ Q.11 > Delete the record of the student who is enrolled in the course ‘IT’.
 
 
 Ans - >   DELETE FROM STUDENT WHERE STUDENT_ID = (
-          SELECT STUDENT_ID FROM STUDENT_COURSE WHERE COURSE_ID = (SELECT COURSE_ID FROM COURSE WHERE COURSE = 'IT'
+          SELECT STUDENT_ID FROM STUDENT_COURSE WHERE COURSE_ID = (
+          SELECT COURSE_ID FROM COURSE WHERE COURSE = 'IT'
           )
           );
 
