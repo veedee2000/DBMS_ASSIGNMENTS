@@ -4,7 +4,7 @@
 Q.2 > At the time of creation if we forget to create a field enrollment date (ENROLL_DATE) in ENROLL table so add the field.
 
 
-Ans - >   ALTER TABLE ENROLL ADD ENROLL_DATE VARCHAR(20);
+Ans - >   ALTER TABLE ENROLL ADD ENROLL_DATE DATE;
 
 
 Q.3 > Course name cannot be blank, therefore add the criteria in the specific table.
