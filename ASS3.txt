@@ -22,16 +22,22 @@ Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
           );
 
 
+Q.5 > Give the details of a student with all subjects and grade where he/she enroll(enter the sid value as input)
+
+Ans - > 
+
+
 Q.6 > Display the COURSE with maximum number of STUDENTS Enrolled.
 
 
 Ans - >   SELECT COURSE_NAME FROM COURSE WHERE COURSE_ID IN (
           SELECT COURSE_ID FROM STUDENT_COURSE GROUP BY COURSE_ID HAVING COUNT(*) = (
-	SELECT MAX(C) FROM (
-	SELECT COUNT(*) AS C FROM STUDENT_COURSE GROUP BY COURSE_ID order by count(COURSE_id)
+	  SELECT MAX(C) FROM (
+	  SELECT COUNT(*) AS C FROM STUDENT_COURSE GROUP BY COURSE_ID order by count(COURSE_id)
           )
           )
           );
+
 
 Q.7 > Find out the course in which no student enrolled.
 
