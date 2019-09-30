@@ -1,4 +1,4 @@
-
+A
 
 
 Q.2 > At the time of creation if we forget to create a field enrollment date (ENROLL_DATE) in ENROLL table so add the field.
@@ -54,7 +54,7 @@ Ans - >   ALTER TABLE COURSE RENAME TO DEPARTMENT;
 Q.10 > Change the Marks Grade of Student “A” to “B” who is Enroll in the subject DBMS.
 
 
-Ans - >   UPDATE GRADE SET GRADE_RECIEVED = 'B' WHERE GRADE_RECIEVED = 'B' AND SUBJECT_ID = (
+Ans - >   UPDATE GRADE SET GRADE_RECIEVED = 'B' WHERE GRADE_RECIEVED = 'A' AND SUBJECT_ID = (
           SELECT SUBJECT_ID FROM SUBJECT WHERE SUBJECT_NAME = 'DBMS'
           );
 
