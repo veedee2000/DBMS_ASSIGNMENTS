@@ -1,1 +1,314 @@
+Q1 > Write a PL/SQL code to print Today is fall on weekend or weekdays using if else statement.
 
+DECLARE 
+date_current DATE;
+day_current VARCHAR2(15);
+BEGIN
+    date_current := SYSDATE;
+    day_current := TO_CHAR(DATE_CURRENT, 'DAY');
+    IF day_current IN ('SATURDAY','SUNDAY') THEN 
+        DBMS_OUTPUT.PUT_LINE('TODAY IS NOT A WEEKDAY');
+    ELSE 
+        DBMS_OUTPUT.PUT_LINE('TODAY IS A WEEKDAY');
+    END IF;
+END;
+
+RESULT > TODAY IS A WEEKDAY
+
+Q2 > Write a PL/SQL code to check that an inputted a single character is vowel or not .If vowel then display which vowel it is.
+
+DECLARE 
+my_variable CHAR(1);
+BEGIN
+    my_variable := &my_variable;
+    IF UPPER(my_variable) in ('A','E','I','O','U') THEN 
+        DBMS_OUTPUT.PUT_LINE(my_variable || ' IS A VOWEL');
+    ELSE DBMS_OUTPUT.PUT_LINE(my_variable ||' IS A CONSONANT');
+    END IF;
+END;
+
+RESULT > 
+
+Enter value for my_variable: 'a'
+old   2: my_variable char(1):= &my_variable;
+new   2: my_variable char(1):= 'a';
+a IS A VOWEL
+
+Q3 > Write a PL/SQL code block to find out the sum of first ten natural numbers (1+2+3+4+5+6+7+8+9+10 this series).
+
+DECLARE
+    total NUMBER;
+    val NUMBER;
+BEGIN
+    total := 0;
+    val := 1;
+    LOOP
+        total := total + val;
+        val := val + 1;
+        EXIT WHEN val > 10;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('SUM = '||total);
+END;
+
+RESULT > SUM = 55
+
+Q4 > Write a PL/SQL block that will ask for two numbers and one operand (+, -, *, /). Then it will calculate and display the result.
+
+DECLARE
+n NUMBER:= &n;
+m NUMBER:= &m;
+sign CHAR(1):= '&sign';
+BEGIN
+    IF sign='+' THEN
+        DBMS_OUTPUT.PUT_LINE('Sum = '||(n + m));
+
+    ELSIF sign='-' THEN
+        DBMS_OUTPUT.PUT_LINE('Difference = '||(n - m));
+
+    ELSIF sign='*' THEN
+        DBMS_OUTPUT.PUT_LINE('Product = '||(n * m));
+
+    ELSIF sign='/' THEN
+        DBMS_OUTPUT.PUT_LINE('Quotient = '||(n / m));
+    END IF;
+END;
+
+RESULT > 
+
+Enter value for n: 10
+old   2: n NUMBER:= &n;
+new   2: n NUMBER:= 5;
+Enter value for m: 6
+old   3: m NUMBER:= &m;
+new   3: m NUMBER:= 6;
+Enter value for sign: *
+old   4: sign CHAR(1):= '&sign';
+new   4: sign CHAR(1):= '*';
+Product = 60
+
+Q5 > Write a PL/SQL code block to display a number in a reverse way.
+
+DECLARE
+    old_number NUMBER := &old_number;
+    new_number NUMBER;
+    value_now NUMBER;
+BEGIN
+    new_number := 0;
+    LOOP
+        new_number := new_number * 10 + MOD(old_number,10);
+        old_number := old_number / 10;
+        old_number := trunc(old_number);
+        EXIT WHEN old_number <= 0;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('REVERSE = '||new_number);
+END;
+
+RESULT > 
+
+Enter value for n: 7843
+old   7:  n:=&n;
+new   7:  n:=7843;
+Reversed number is 3487
+
+Q6 > Write a PL/SQL block to display the dates of this month which are Tuesday.
+
+DECLARE
+    date_start DATE;
+    date_end DATE;
+    date_current DATE;
+    current_day VARCHAR2(15);
+BEGIN
+    date_start := TRUNC(SYSDATE,'MONTH');
+    date_end := ADD_MONTHS(date_start,1);
+    date_current := SYSDATE;
+    WHILE (date_current < date_end) LOOP
+        current_day := RTRIM(TO_CHAR(date_current,'DAY'));
+        IF UPPER(current_day) = 'TUESDAY' THEN 
+            DBMS_OUTPUT.PUT_LINE(date_current);
+        END IF;
+        date_current := date_current + 1;
+    END LOOP;
+END;
+
+RESULT > 
+
+12-NOV-19
+19-NOV-19
+26-NOV-19
+
+Q7 > Write a program in PL/SQL to print the prime numbers between 1 to 50.
+
+DECLARE
+    i NUMBER;
+    j NUMBER;
+    c NUMBER;
+BEGIN
+    i := 2;
+    WHILE (i < 51) LOOP
+        j := 2;
+        c := 1;
+        WHILE (j <= TRUNC(i / 2)) LOOP
+            IF MOD(i,j) = 0 THEN 
+                c := 0;
+            END IF;
+            j := j + 1;
+        END LOOP;
+        IF c = 1 THEN 
+            DBMS_OUTPUT.PUT_LINE(i);
+        END IF;
+        i := i + 1;
+    END LOOP;
+END;
+
+RESULT > 
+
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+
+Q8 > Write a PL/SQL code block that will accept an Employee number from the user and allows a Commission of Rs.200 only if the net salary is less than Rs.2000. Write a PL/SQL block that will display the name, department and the salary of the first 4 employees getting lowest salary.
+
+DECLARE
+    eno emp.empno%type;
+    s emp.sal%type;
+    c integer;
+BEGIN
+    eno := &eno;
+    c:=0;
+    SELECT sal into s from emp where empno = eno;
+    IF s<2000 THEN
+        UPDATE emp SET comm = 200 where empno = eno;
+    END IF;
+    FOR cursor1 IN (SELECT ename, dname, sal from emp, dept  
+        where emp.deptno = dept.deptno  
+        order by (12*sal+nvl(comm, 0))
+        )  
+        LOOP
+            c:=c+1;
+            IF  c>4 THEN 
+                EXIT;
+            END IF;
+            DBMS_OUTPUT.PUT_LINE('Name = ' || cursor1.ename ||', Department = ' || cursor1.dname||',Salary = ' || cursor1.sal );
+        END LOOP;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Wrong employee ID');
+END;
+
+RESULT > 
+
+Enter value for eno: 7369
+old   6: eno := &eno;
+new   6: eno := 7369;
+Name = SMITH, Department = RESEARCH,Salary = 800
+Name = JAMES, Department = SALES,Salary = 950
+Name = ADAMS, Department = RESEARCH,Salary = 1100
+Name = WARD, Department = SALES,Salary = 1250
+
+Q9 > Write a PL/SQL block to display the name of the department and their employee name only who got the highest net salary.
+
+DECLARE  
+BEGIN  
+    FOR cursor1 IN  
+    (select ename, dname from  
+        emp inner join dept on 
+        emp.deptno = dept.deptno  
+        where 12*sal+nvl(comm, 0) in  
+            (select  max(12*sal+nvl(comm, 0)) 
+        from emp group by deptno )) 
+    LOOP  
+        DBMS_OUTPUT.PUT_LINE('Name = ' || cursor1.ename || ', Department = ' || cursor1.dname); 
+    END LOOP;  
+END; 
+
+RESULT > 
+
+Q10 > Write a PL/SQL procedure that will calculate and print the incentive of the employees those who worked under a specific Job.
+
+DECLARE   
+j emp.job%type;     
+i emp.sal%type;    
+BEGIN   
+    j := '&j';   
+    FOR cursor1 IN (SELECT empno, ename, sal from emp  
+                        where emp.job = j)  
+    LOOP   
+        IF j = 'CLERK' THEN  
+            i := 0.1*cursor1.sal;  
+        ELSIF j = 'SALESMAN' THEN  
+            i := 0.12*cursor1.sal;  
+        ELSIF j = 'MANAGER' THEN  
+            i := 0.15*cursor1.sal;  
+        ELSIF j = 'ANALYST' THEN  
+            i := 1000;  
+        ELSE  
+            i := 0;  
+        END IF;  
+            DBMS_OUTPUT.PUT_LINE('EmployeeNO = ' || cursor1.empno || ', Name = ' || cursor1.ename || ', Incentive = ' || i||  ',Salary = ' || cursor1.sal );  
+    END LOOP;   
+    EXCEPTION   
+        WHEN NO_DATA_FOUND THEN    
+            DBMS_OUTPUT.PUT_LINE('Wrong JOB name');   
+END; 
+
+Q11 > Write a PL/SQL Cursor that will accept an employee number from the user and allows an increment of 20% if the salary is less than 1500 otherwise increment of Rs.1200. It should print old and new salary for all employees.
+
+DECLARE
+    empno1 emp.empno%type;
+    CURSOR c IS
+    SELECT sal
+    FROM emp
+    WHERE empno=empno1;
+    oldsal emp.sal%type;
+    esal emp.sal%type;
+BEGIN
+    empno1:=&empno1;
+    OPEN c;
+    FETCH c INTO oldsal;
+    IF(oldsal<1500) THEN
+        esal := oldsal*1.2;
+    ELSE
+        esal := oldsal+1200;
+    END IF;
+    DBMS_OUTPUT.PUT_LINE('oldsal = '||oldsal||',newsal = '||esal);
+    UPDATE emp
+    SET sal=esal
+    WHERE empno=empno1;
+    CLOSE c;
+END
+
+RESULT > 
+
+Enter value for empno1: 7369
+old  10: empno1:=&empno1;
+new  10: empno1:=7369;
+oldsal = 1382.4,newsal = 1658.88
+
+Q12 > When any new record will be inserted in EMP_XX table, a PL/SQL trigger will fired that will check if the department no is available or not. If available then the tuple will be inserted otherwise it will undo the operation and display appropriate messages.
+
+CREATE OR REPLACE TRIGGER trg
+BEFORE INSERT
+    ON emp
+    FOR EACH row
+        DECLARE
+            e EXCEPTION;
+        BEGIN
+            IF(:new.deptno not in (10,20,30,40)) THEN
+                RAISE e;
+            END IF;
+            EXCEPTION
+            WHEN e THEN
+                RAISE_APPLICATION_ERROR(-20000,'Department No. wrong');
+        END;
