@@ -1,5 +1,6 @@
 Q1 > Write a PL/SQL code to print Today is fall on weekend or weekdays using if else statement.
 
+SET SERVEROUTPUT ON;
 DECLARE 
 date_current DATE;
 day_current VARCHAR2(15);
@@ -17,6 +18,7 @@ RESULT > TODAY IS A WEEKDAY
 
 Q2 > Write a PL/SQL code to check that an inputted a single character is vowel or not .If vowel then display which vowel it is.
 
+SET SERVEROUTPUT ON;
 DECLARE 
 my_variable CHAR(1);
 BEGIN
@@ -36,6 +38,7 @@ a IS A VOWEL
 
 Q3 > Write a PL/SQL code block to find out the sum of first ten natural numbers (1+2+3+4+5+6+7+8+9+10 this series).
 
+SET SERVEROUTPUT ON;
 DECLARE
     total NUMBER;
     val NUMBER;
@@ -54,6 +57,7 @@ RESULT > SUM = 55
 
 Q4 > Write a PL/SQL block that will ask for two numbers and one operand (+, -, *, /). Then it will calculate and display the result.
 
+SET SERVEROUTPUT ON;
 DECLARE
 n NUMBER:= &n;
 m NUMBER:= &m;
@@ -88,6 +92,7 @@ Product = 60
 
 Q5 > Write a PL/SQL code block to display a number in a reverse way.
 
+SET SERVEROUTPUT ON;
 DECLARE
     old_number NUMBER := &old_number;
     new_number NUMBER;
@@ -112,6 +117,7 @@ Reversed number is 3487
 
 Q6 > Write a PL/SQL block to display the dates of this month which are Tuesday.
 
+SET SERVEROUTPUT ON;
 DECLARE
     date_start DATE;
     date_end DATE;
@@ -138,6 +144,7 @@ RESULT >
 
 Q7 > Write a program in PL/SQL to print the prime numbers between 1 to 50.
 
+SET SERVEROUTPUT ON;
 DECLARE
     i NUMBER;
     j NUMBER;
@@ -180,6 +187,7 @@ RESULT >
 
 Q8 > Write a PL/SQL code block that will accept an Employee number from the user and allows a Commission of Rs.200 only if the net salary is less than Rs.2000. Write a PL/SQL block that will display the name, department and the salary of the first 4 employees getting lowest salary.
 
+SET SERVEROUTPUT ON;
 DECLARE
     eno emp.empno%type;
     s emp.sal%type;
@@ -219,6 +227,7 @@ Name = WARD, Department = SALES,Salary = 1250
 
 Q9 > Write a PL/SQL block to display the name of the department and their employee name only who got the highest net salary.
 
+SET SERVEROUTPUT ON;
 DECLARE  
 BEGIN  
     FOR cursor1 IN  
@@ -237,6 +246,7 @@ RESULT >
 
 Q10 > Write a PL/SQL procedure that will calculate and print the incentive of the employees those who worked under a specific Job.
 
+SET SERVEROUTPUT ON;
 DECLARE   
 j emp.job%type;     
 i emp.sal%type;    
@@ -265,6 +275,7 @@ END;
 
 Q11 > Write a PL/SQL Cursor that will accept an employee number from the user and allows an increment of 20% if the salary is less than 1500 otherwise increment of Rs.1200. It should print old and new salary for all employees.
 
+SET SERVEROUTPUT ON;
 DECLARE
     empno1 emp.empno%type;
     CURSOR c IS
@@ -298,6 +309,7 @@ oldsal = 1382.4,newsal = 1658.88
 
 Q12 > When any new record will be inserted in EMP_XX table, a PL/SQL trigger will fired that will check if the department no is available or not. If available then the tuple will be inserted otherwise it will undo the operation and display appropriate messages.
 
+SET SERVEROUTPUT ON;
 CREATE OR REPLACE TRIGGER trg
 BEFORE INSERT
     ON emp
