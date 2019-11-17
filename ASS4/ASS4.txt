@@ -6,7 +6,7 @@ date_current DATE;
 day_current VARCHAR2(15);
 BEGIN
     date_current := SYSDATE;
-    day_current := TO_CHAR(DATE_CURRENT, 'DAY');
+    day_current := RTRIM(TO_CHAR(DATE_CURRENT, 'DAY'));
     IF day_current IN ('SATURDAY','SUNDAY') THEN 
         DBMS_OUTPUT.PUT_LINE('TODAY IS NOT A WEEKDAY');
     ELSE 
